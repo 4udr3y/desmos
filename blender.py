@@ -1,6 +1,10 @@
 import bpy
 from mathutils import Color
 
+home_dir = os.path.expanduser("~")
+file_path = os.path.join(home_dir, 'desmos_file.txt')
+f = open(file_path,'w')
+
 obdata = bpy.context.object
 obdata = bpy.context.selected_objects # Comment out to export all objects, not just selected ones
 
@@ -31,8 +35,6 @@ for object in all_objects:
         faces.append(face)
     faces.append([object.name,object.location,color])
     objects.append(faces)
-
-f = open('desmos_file.txt','w')
     
 for object in objects:
     f.write('\n\n// {}\n'.format(object[-1][0]))
