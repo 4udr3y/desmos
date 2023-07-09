@@ -96,7 +96,6 @@ state.expressions.list.push(
     folderId: "1",
     latex: "f_{1c}\\left(x,y,z\\right)=f_{1}\\left(\\sqrt{x^{2}+z^{2}},y,\\tan^{-1}\\left(\\frac{z+.0001}{x}\\right)+\\left\\{x<0:1,0\\right\\}\\pi\\right)"
 },
-
 {
     type: "text",
     folderId: "1",
@@ -134,16 +133,11 @@ state.expressions.list.push(
     folderId: "1",
     text: "calculates polygon depth given list"
 },
-// {
-//     type: "expression",
-//     folderId: "1",
-//     latex: "d_{epth}\\left(l_{ist}\\right)=f_{2c}\\left(\\frac{\\sum_{n=0}^{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}-1}l_{ist}\\left[3n+1\\right]}{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}},\\frac{\\sum_{n=0}^{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}-1}l_{ist}\\left[3n+2\\right]}{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}},\\frac{\\sum_{n=0}^{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}-1}l_{ist}\\left[3n+3\\right]}{\\frac{\\operatorname{length}\\left(l_{ist}\\right)}{3}}\\right)"
-// },
 {
     type: "expression",
     id: "1153",
     color: "#6042a6",
-    latex: "d_{epth}\\left(l_{ist}\\right)=\\operatorname{mean}\\left(\\left[f_{2c}\\left(v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]-3+1\\right],v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]-3+2\\right],v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]-3+3\\right]\\right)\\operatorname{for}i=\\left[1...\\operatorname{length}\\left(l_{ist}\\right)\\right]\\right]\\right)"
+    latex: "d_{epth}\\left(l_{ist}\\right)=\\operatorname{mean}\\left(\\left[f_{2c}\\left(v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]+1\\right],v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]+2\\right],v_{ertices}\\left[3\\cdot l_{ist}\\left[i\\right]+3\\right]\\right)\\operatorname{for}i=\\left[1...\\operatorname{length}\\left(l_{ist}\\right)\\right]\\right]\\right)"
 },
 
 {
@@ -277,7 +271,6 @@ state.expressions.list.push(
 )
 
 // PASTE BLENDER OUTPUT HERE
-
 
 
 n = polygons.length
