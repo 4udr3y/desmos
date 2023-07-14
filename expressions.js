@@ -1,6 +1,6 @@
 state = Calc.getState()
 
-objectName = 'base'
+objectName = 'cradle4'
 
 // PASTE BLENDER OUTPUT HERE
 
@@ -83,18 +83,18 @@ state.expressions.list.push(
     latex: "v_{ertices3d"+objectName+"}=[" + vertices_3d + "]",
     hidden: true
 },
-{
-    type: "folder",
-    id: "2",
-    collapsed: true,
-    title: "Polygons ("+objectName+")"
-},
+// {
+//     type: "folder",
+//     id: "2",
+//     collapsed: true,
+//     title: "Polygons ("+objectName+")"
+// },
 )
 // Add individual polygon expressions
 for (let i = 0; i < polygons.length; i++) {
     state.expressions.list.push({
         type: "expression",
-        folderId: "2",
+        folderId: "3",
         latex: "s_{"+objectName+i+"}=\\left["+polygons[i].slice(4)+"\\right]"
     })
 }

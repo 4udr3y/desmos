@@ -1,6 +1,6 @@
-state = Calc.getState()
+state = Calc.getState() // TODO: Implement backface culling
 
-objectName = 'cradle1'
+objectName = 'cradle5'
 
 a = .66
 a2 = -0.3
@@ -10,7 +10,6 @@ lightlist = [20*Math.cos(phi),5,20*Math.sin(phi)]
 light = normalize(lightlist)
 
 // PASTE BLENDER OUTPUT HERE
-
 
 
 
@@ -43,7 +42,7 @@ function f2c(x,y,z) {
 dot = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
 
 function cross(a, b) {
-    return [-1*(a[1]*b[2]-a[2]-b[1]), -1*(a[2]*b[0]-a[0]*b[2]), -1*(a[0]*b[1]-a[1]*b[0])];
+    return [-1*(a[1]*b[2]-a[2]*b[1]), -1*(a[2]*b[0]-a[0]*b[2]), -1*(a[0]*b[1]-a[1]*b[0])];
 }
 
 function normalize(v) {
@@ -163,6 +162,7 @@ state.expressions.list.push(
         title: objectName
     }
 )
+console.log(normal(getface(polygons[1].slice(4,sortedPolygons[p].length))))
 
 for (p in sortedPolygons) {
     const polygonVertices = (sortedPolygons[p].slice(4,sortedPolygons[p].length));
@@ -176,10 +176,12 @@ for (p in sortedPolygons) {
     }
     polygonText = polygonText.slice(0,-1)
     polygonText += "\\right)"
+    console.log([sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))])
     state.expressions.list.push(
         {
             type: "expression",
             folderId: "3",
+            lineWidth: "0.01",
             color: hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))),
             lineOpacity: sortedPolygons[p][0].toString(),
             fillOpacity: "0",
