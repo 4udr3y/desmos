@@ -1,6 +1,6 @@
 state = Calc.getState() // TODO: Implement backface culling
 
-objectName = 'cradle5'
+objectName = 'test'
 
 a = .66
 a2 = -0.3
@@ -56,6 +56,15 @@ function normal(v) {
 
 function shadow(face) {
     return 0.5 + dot(light, normalize(normal(getface(face)))) * .5;
+}
+
+function winding(list) {
+    sum = 0;
+    for (i in [...Array(list.length - 1).keys()]) {
+        sum += (list[parseInt(i)+1][0]-list[parseInt(i)][0])*(list[parseInt(i)+1][1]+list[parseInt(i)][1])
+    }
+    sum += (list[0][0]-list[list.length-1][0])*(list[0][1]+list[list.length-1][1]);
+    return sum;
 }
 
 function getface(s) {
@@ -118,7 +127,6 @@ function hsvToHex(h, s, v) {
     return `#${hex}`;
 }
     
-
 depths = []
 
 vertices_formatted = []
@@ -162,7 +170,6 @@ state.expressions.list.push(
         title: objectName
     }
 )
-console.log(normal(getface(polygons[1].slice(4,sortedPolygons[p].length))))
 
 for (p in sortedPolygons) {
     const polygonVertices = (sortedPolygons[p].slice(4,sortedPolygons[p].length));
@@ -176,42 +183,27 @@ for (p in sortedPolygons) {
     }
     polygonText = polygonText.slice(0,-1)
     polygonText += "\\right)"
-    console.log([sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))])
-    state.expressions.list.push(
-        {
-            type: "expression",
-            folderId: "3",
-            lineWidth: "0.01",
-            color: hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))),
-            lineOpacity: sortedPolygons[p][0].toString(),
-            fillOpacity: "0",
-            latex: polygonText
-        },
-        {
-            type: "expression",
-            folderId: "3",
-            color: hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))),
-            lineOpacity: "0",
-            fillOpacity: sortedPolygons[p][0].toString(),
-            latex: polygonText
-        }
-    )
+    if (winding(flattenedVertices) > 0) {
+        state.expressions.list.push(
+            {
+                type: "expression",
+                folderId: "3",
+                lineWidth: "1",
+                color: hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))),
+                lineOpacity: sortedPolygons[p][0].toString(),
+                fillOpacity: "0",
+                latex: polygonText
+            },
+            {
+                type: "expression",
+                folderId: "3",
+                color: hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))),
+                lineOpacity: "0",
+                fillOpacity: sortedPolygons[p][0].toString(),
+                latex: polygonText
+            }
+        )
+    }
 }
-
-
-n = polygons.length
-
-// Define color list
-var myColors="";
-var myDepths="";
-var myOpacity=[];
-for (let i = 0; i < n; i++) {
-    myColors += "\\operatorname{hsv}\\left("+polygons[i].slice(1,4)+"\\cdot s_{hadow}\\left(s_{"+objectName+i+"},v_{ertices"+objectName+"}\\right)\\right),";
-    myDepths += "d_{epth}\\left(s_{"+objectName+i+"},v_{ertices"+objectName+"}\\right),"
-    myOpacity.push(polygons[i].slice(0,1))
-}
-
-myDepths = myDepths.slice(0,-1)
-myColors = myColors.slice(0,-1)
 
 Calc.setState(state)
