@@ -1,10 +1,13 @@
+// Creates dynamic 3D polygons from Blender output
+
 state = Calc.getState()
 
-objectName = 'cradle4'
+// Set object name
+objectName = 'name'
 
-// PASTE BLENDER OUTPUT HERE
+//// PASTE BLENDER OUTPUT HERE
 
-
+////
 
 n = polygons.length
 
@@ -12,12 +15,10 @@ n = polygons.length
 var myColors="";
 var myDepths="";
 var myOpacity=[];
-// var myColors2=[]
 for (let i = 0; i < n; i++) {
     myColors += "\\operatorname{hsv}\\left("+polygons[i].slice(1,4)+"\\cdot s_{hadow}\\left(s_{"+objectName+i+"},v_{ertices"+objectName+"}\\right)\\right),";
     myDepths += "d_{epth}\\left(s_{"+objectName+i+"},v_{ertices"+objectName+"}\\right),"
     myOpacity.push(polygons[i].slice(0,1))
-    // myColors2.push("\\operatorname{hsv}\\left("+polygons[i].slice(0,3)+"\\cdot s_{hadow}\\left(s_{"+i+"}\\right)\\right)")
 }
 
 console.log(myOpacity)
@@ -29,9 +30,6 @@ var myPolygons2 = ""
 for (let i = 0; i < n; i++) {
     numVertices = polygons[i].length - 4
     polygonText = "v_{ertices3d"+objectName+"}\\left[s_{"+objectName+i+"}+1\\right],"
-    // for (let j = 0; j < numVertices; j++) {
-    //     polygonText += "v_{ertices3d}\\left[s_{"+i+"}\\left["+j+"+1\\right]+1\\right],"
-    // }
     polygonText = polygonText.slice(0,-1)
     myPolygons2 += "p_{olygon}\\left("+polygonText+"\\right),"
 }
@@ -83,12 +81,6 @@ state.expressions.list.push(
     latex: "v_{ertices3d"+objectName+"}=[" + vertices_3d + "]",
     hidden: true
 },
-// {
-//     type: "folder",
-//     id: "2",
-//     collapsed: true,
-//     title: "Polygons ("+objectName+")"
-// },
 )
 // Add individual polygon expressions
 for (let i = 0; i < polygons.length; i++) {

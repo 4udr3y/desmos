@@ -1,17 +1,19 @@
-state = Calc.getState() // TODO: Implement backface culling
+// Creates 2D flattened polygons from Blender output
 
-objectName = 'test'
+state = Calc.getState()
 
-a = .66
-a2 = -0.3
+objectName = 'beach'
+
+a = .9
+a2 = -0.247
 d = 40
-phi = 0.5
-lightlist = [20*Math.cos(phi),5,20*Math.sin(phi)]
+phi = 2.2
+lightlist = [Math.cos(phi),0.25,Math.sin(phi)]
 light = normalize(lightlist)
 
-// PASTE BLENDER OUTPUT HERE
+//// PASTE BLENDER OUTPUT HERE
 
-
+////
 
 function f1(x,y,theta) {
     return [d/(d-f2(x,y,theta))*x*Math.cos(a+theta), d/(d-f2(x,y,theta))*(x*Math.sin(a2)*Math.sin(a+theta)+y*Math.cos(a2))];
@@ -29,7 +31,6 @@ function f2(x,y,theta) {
 }
 
 function f2c(x,y,z) {
-    // y = parseFloat(y);
     x = parseFloat(x);
     y = parseFloat(y);
     z = parseFloat(z);
@@ -77,6 +78,7 @@ function getface(s) {
     return face;
 }
 
+// Sorts array 1 using array 2 as a key
 function sortArrays(array1, array2) {
     // Create an array of indices [0, 1, 2, ...] to preserve the original order
     const indices = array1.map((_, index) => index);
@@ -90,42 +92,53 @@ function sortArrays(array1, array2) {
     return sortedArray;
 } 
 
-function hsvToHex(h, s, v) {
-    const h_i = Math.floor(h * 6);
-    const f = h * 6 - h_i;
-    const p = v * (1 - s);
-    const q = v * (1 - f * s);
-    const t = v * (1 - (1 - f) * s);
-    let r, g, b;
+function hsvToHex(h, s, l) {
+    // l /= 100;
+    const a = s * Math.min(l, 1 - l);
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
+
+// function hsvToHex(h, s, v) {
+//     const h_i = Math.floor(h * 6);
+//     const f = h * 6 - h_i;
+//     const p = v * (1 - s);
+//     const q = v * (1 - f * s);
+//     const t = v * (1 - (1 - f) * s);
+//     let r, g, b;
   
-    switch (h_i) {
-      case 0:
-        [r, g, b] = [v, t, p];
-        break;
-      case 1:
-        [r, g, b] = [q, v, p];
-        break;
-      case 2:
-        [r, g, b] = [p, v, t];
-        break;
-      case 3:
-        [r, g, b] = [p, q, v];
-        break;
-      case 4:
-        [r, g, b] = [t, p, v];
-        break;
-      case 5:
-        [r, g, b] = [v, p, q];
-        break;
-      default:
-        break;
-    }
+//     switch (h_i) {
+//       case 0:
+//         [r, g, b] = [v, t, p];
+//         break;
+//       case 1:
+//         [r, g, b] = [q, v, p];
+//         break;
+//       case 2:
+//         [r, g, b] = [p, v, t];
+//         break;
+//       case 3:
+//         [r, g, b] = [p, q, v];
+//         break;
+//       case 4:
+//         [r, g, b] = [t, p, v];
+//         break;
+//       case 5:
+//         [r, g, b] = [v, p, q];
+//         break;
+//       default:
+//         break;
+//     }
   
-    const rgb = [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
-    const hex = rgb.map(component => component.toString(16).padStart(2, '0')).join('');
+//     const rgb = [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+//     const hex = rgb.map(component => component.toString(16).padStart(2, '0')).join('');
   
-    return `#${hex}`;
-}
+//     return `#${hex}`;
+// }
     
 depths = []
 
@@ -172,6 +185,7 @@ state.expressions.list.push(
 )
 
 for (p in sortedPolygons) {
+    console.log(sortedPolygons[p][0].toString());
     const polygonVertices = (sortedPolygons[p].slice(4,sortedPolygons[p].length));
     flattenedVertices = []
     for (v in polygonVertices) {
