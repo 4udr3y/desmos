@@ -25,40 +25,40 @@ state.expressions.list.push(
     latex: " p_{hi}=0.34",
     slider: {hardMin: true, hardMax: true, loopMode: 'LOOP_FORWARD', min: '0', max: '2\\pi'}
 },
-{
-    type: "expression",
-    folderId: "3",
-    latex: "a=-0.72"
-},
-{
-    type: "expression",
-    folderId: "3",
-    slider: {hardMax: true, max: '10'},
-    latex: "a_{2}=-0.4"
-},
-{
-    type: "expression",
-    folderId: "3",
-    latex: "d=40"
-},
-{
-    type: "text",
-    folderId: "3",
-    text: "toggle orthographic/perspective"
-},
-{
-    type: "expression",
-    folderId: "3",
-    latex: "t_{oggle}=1",
-    slider: {hardMin: true, hardMax: true, min: '0', max: '1', step:'1'}
-},
-{
-    type: "expression",
-    folderId: "3",
-    color: Desmos.Colors.BLACK,
-    hidden: true,
-    latex: "\\left(-10a,10a_{2}\\right)"
-},
+// {
+//     type: "expression",
+//     folderId: "3",
+//     latex: "a=-0.72"
+// },
+// {
+//     type: "expression",
+//     folderId: "3",
+//     slider: {hardMax: true, max: '10'},
+//     latex: "a_{2}=-0.4"
+// },
+// {
+//     type: "expression",
+//     folderId: "3",
+//     latex: "d=40"
+// },
+// {
+//     type: "text",
+//     folderId: "3",
+//     text: "toggle orthographic/perspective"
+// },
+// {
+//     type: "expression",
+//     folderId: "3",
+//     latex: "t_{oggle}=1",
+//     slider: {hardMin: true, hardMax: true, min: '0', max: '1', step:'1'}
+// },
+// {
+//     type: "expression",
+//     folderId: "3",
+//     color: Desmos.Colors.BLACK,
+//     hidden: true,
+//     latex: "\\left(-10a,10a_{2}\\right)"
+// },
 {
     type: "folder",
     id: "1305",
@@ -173,14 +173,14 @@ state.expressions.list.push(
     id: "1324",
     folderId: "1305",
     color: "#000000",
-    latex: "c_{ross}\\left(A,B\\right)=\\left(A.y\\cdot B.z-A.z\\cdot B.y,A.z\\cdot B.x-A.x\\cdot B.z,A.x\\cdot B.y-A.y\\cdot B.x\\right)"
+    latex: "c_{ross}\\left(V,W\\right)=\\left(V.y\\cdot W.z-V.z\\cdot W.y,V.z\\cdot W.x-V.x\\cdot W.z,V.x\\cdot W.y-V.y\\cdot W.x\\right)"
 },
 {
     type: "expression",
     id: "1325",
     folderId: "1305",
     color: "#c74440",
-    latex: "d_{ot}\\left(A,B\\right)=A.x\\cdot B.x+A.y\\cdot B.y+A.z\\cdot B.z"
+    latex: "d_{ot}\\left(V,W\\right)=V.x\\cdot W.x+V.y\\cdot W.y+V.z\\cdot W.z"
 },
 {
     type: "expression",
@@ -207,7 +207,7 @@ state.expressions.list.push(
     id: "1210",
     folderId: "1305",
     color: "#6042a6",
-    latex: "n_{ormal}\\left(A,B,C\\right)=-c_{ross}\\left(\\left(C.x-B.x,C.y-B.y,C.z-B.z\\right),\\left(A.x-B.x,A.y-B.y,A.z-B.z\\right)\\right)"
+    latex: "n_{ormal}\\left(V,W,X\\right)=-c_{ross}\\left(\\left(X.x-W.x,X.y-W.y,X.z-W.z\\right),\\left(V.x-W.x,V.y-W.y,V.z-W.z\\right)\\right)"
 },
 // {
 //     type: "expression",
@@ -235,59 +235,59 @@ state.expressions.list.push(
     id: "1330",
     folderId: "1305",
     color: "#000000",
-    latex: "s_{hadow}\\left(A, B, C\\right)=.5+d_{ot}\\left(l_{ight},n_{ormalize}\\left(n_{ormal}\\left(A, B, C\\right)\\right)\\right)\\cdot .5"
+    latex: "s_{hadow}\\left(V, W, X\\right)=.5-d_{ot}\\left(l_{ight},n_{ormalize}\\left(n_{ormal}\\left(V, W, X\\right)\\right)\\right)\\cdot .5"
     // latex: "s_{hadow}\\left(f_{ace},v_{ertices}\\right)=.5+d_{ot}\\left(l_{ight},n_{ormalize}\\left(n_{ormal}\\left(g_{etface}\\left(f_{ace},v_{ertices}\\right)\\right)\\right)\\right)\\cdot .5"
 },
-{
-    type: "text",
-    id: "4139",
-    folderId: "1305",
-    text: "Rotation Functions"
-},
-{
-    type: "expression",
-    id: "1371",
-    folderId: "1305",
-    color: "#2d70b3",
-    latex: "r_{otateYX}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.x-L_{2}.x\\right)\\cos\\theta-\\left(L_{1}.z-L_{2}.z\\right)\\sin\\theta+L_{2}.x"
-},
-{
-    type: "expression",
-    id: "1373",
-    folderId: "1305",
-    color: "#6042a6",
-    latex: "r_{otateYZ}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.z-L_{2}.z\\right)\\cos\\theta+\\left(L_{1}.x-L_{2}.x\\right)\\sin\\theta+L_{2}.z"
-},
-{
-    type: "expression",
-    id: "1375",
-    folderId: "1305",
-    color: "#c74440",
-    latex: "r_{otateZX}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.x-L_{2}.x\\right)\\cos\\theta-\\left(L_{1}.y-L_{2}.y\\right)\\sin\\theta+L_{2}.x"
-},
-{
-    type: "expression",
-    id: "1376",
-    folderId: "1305",
-    color: "#2d70b3",
-    latex: "r_{otateZY}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.y-L_{2}.y\\right)\\cos\\theta+\\left(L_{1}.x-L_{2}.x\\right)\\sin\\theta+L_{2}.y"
-},
-{
-    type: "expression",
-    id: "1331",
-    folderId: "1305",
-    color: "#c74440",
-    latex: "b_{ackground}=\\operatorname{rgb}\\left(230,223,225\\right)"
-},
-{
-    type: "expression",
-    id: "1332",
-    folderId: "1305",
-    color: "#d6d6d6",
-    latex: "\\left[-1,1\\right]y<100",
-    colorLatex: "b_{ackground}",
-    fillOpacity: "1"
-},
+// {
+//     type: "text",
+//     id: "4139",
+//     folderId: "1305",
+//     text: "Rotation Functions"
+// },
+// {
+//     type: "expression",
+//     id: "1371",
+//     folderId: "1305",
+//     color: "#2d70b3",
+//     latex: "r_{otateYX}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.x-L_{2}.x\\right)\\cos\\theta-\\left(L_{1}.z-L_{2}.z\\right)\\sin\\theta+L_{2}.x"
+// },
+// {
+//     type: "expression",
+//     id: "1373",
+//     folderId: "1305",
+//     color: "#6042a6",
+//     latex: "r_{otateYZ}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.z-L_{2}.z\\right)\\cos\\theta+\\left(L_{1}.x-L_{2}.x\\right)\\sin\\theta+L_{2}.z"
+// },
+// {
+//     type: "expression",
+//     id: "1375",
+//     folderId: "1305",
+//     color: "#c74440",
+//     latex: "r_{otateZX}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.x-L_{2}.x\\right)\\cos\\theta-\\left(L_{1}.y-L_{2}.y\\right)\\sin\\theta+L_{2}.x"
+// },
+// {
+//     type: "expression",
+//     id: "1376",
+//     folderId: "1305",
+//     color: "#2d70b3",
+//     latex: "r_{otateZY}\\left(L_{1},L_{2},\\theta\\right)=\\left(L_{1}.y-L_{2}.y\\right)\\cos\\theta+\\left(L_{1}.x-L_{2}.x\\right)\\sin\\theta+L_{2}.y"
+// },
+// {
+//     type: "expression",
+//     id: "1331",
+//     folderId: "1305",
+//     color: "#c74440",
+//     latex: "b_{ackground}=\\operatorname{rgb}\\left(230,223,225\\right)"
+// },
+// {
+//     type: "expression",
+//     id: "1332",
+//     folderId: "1305",
+//     color: "#d6d6d6",
+//     latex: "\\left[-1,1\\right]y<100",
+//     colorLatex: "b_{ackground}",
+//     fillOpacity: "1"
+// },
 )
 
 Calc.setState(state)

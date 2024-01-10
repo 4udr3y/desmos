@@ -2,11 +2,11 @@
 
 state = Calc.getState()
 
-objectName = 'beach'
+objectName = 'cube'
 
-a = .9
+a = 0
 a2 = -0.247
-d = 40
+d = 1000
 phi = 2.2
 lightlist = [Math.cos(phi),0.25,Math.sin(phi)]
 light = normalize(lightlist)
@@ -60,11 +60,13 @@ function shadow(face) {
 }
 
 function winding(list) {
+    // console.log(list)
     sum = 0;
     for (i in [...Array(list.length - 1).keys()]) {
         sum += (list[parseInt(i)+1][0]-list[parseInt(i)][0])*(list[parseInt(i)+1][1]+list[parseInt(i)][1])
     }
     sum += (list[0][0]-list[list.length-1][0])*(list[0][1]+list[list.length-1][1]);
+    // console.log(sum)
     return sum;
 }
 
@@ -165,6 +167,7 @@ function depth(s) {
     return average(vertexDepths);
 }
 
+
 function rgbToHex(r, g, b) {
     return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
 }
@@ -184,8 +187,9 @@ state.expressions.list.push(
     }
 )
 
+
 for (p in sortedPolygons) {
-    console.log(sortedPolygons[p][0].toString());
+    // console.log(sortedPolygons[p][0].toString());
     const polygonVertices = (sortedPolygons[p].slice(4,sortedPolygons[p].length));
     flattenedVertices = []
     for (v in polygonVertices) {
@@ -198,6 +202,7 @@ for (p in sortedPolygons) {
     polygonText = polygonText.slice(0,-1)
     polygonText += "\\right)"
     if (winding(flattenedVertices) > 0) {
+        // console.log(hsvToHex(sortedPolygons[p][1],sortedPolygons[p][2],sortedPolygons[p][3] * shadow(sortedPolygons[p].slice(4,sortedPolygons[p].length))))
         state.expressions.list.push(
             {
                 type: "expression",
@@ -219,5 +224,7 @@ for (p in sortedPolygons) {
         )
     }
 }
+
+console.log(flattenedVertices)
 
 Calc.setState(state)
